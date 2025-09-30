@@ -38,12 +38,14 @@ jobs:
       - name: Get source
         run: |
           git clone --recursive https://github.com/Winkmoon/xiaomi_kernel_sm8250-test.git \
-          -b main \
+          -b munch15-base \
           --depth 1 $GITHUB_WORKSPACE/workdir/source
       - name: Install FullKSU
         run: |
           cd $GITHUB_WORKSPACE/workdir/source
           sed -i "\$s|echo \"\\\$res\"|echo \"-Xinran_StarBai_sm8250-test\"|" ./scripts/setlocalversion
+          wget https://raw.githubusercontent.com/SukiSU-Ultra/SukiSU_patch/main/4.19/ksu_hooks_sukisu_4.19.patch
+          patch -p1 < ksu_hooks_4.19.patch
           rm -rf KernelSU
           rm -rf KernelSU-Next
           curl -LSs "https://raw.githubusercontent.com/Winkmoon/KernelSU-Next/next/kernel/setup.sh" | bash -s next
