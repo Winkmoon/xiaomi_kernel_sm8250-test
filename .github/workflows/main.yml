@@ -58,7 +58,7 @@ jobs:
           #echo "CONFIG_KSU=y" >> ./arch/arm64/configs/munch_defconfig
           #echo "CONFIG_MANUAL_HOOK=y" >> ./arch/arm64/configs/munch_defconfig
           #echo "CONFIG_KERNELSU=y" >> ./arch/arm64/configs/munch_defconfig
-          #sed -i '/atomic_set(&current->seccomp.filter_count, 0);/d' drivers/kernelsu/core_hook.c
+          sed -i '/atomic_set(&current->seccomp.filter_count, 0);/d' drivers/kernelsu/core_hook.c
           
       - name: Build kernel
         run: |
